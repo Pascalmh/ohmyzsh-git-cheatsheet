@@ -124,10 +124,12 @@
       }
 
       /* information */
+      .git-status tr td:first-child,
       .git-diff tr td:first-child,
       .git-log tr td:first-child {
         background: hsl(55, 67%, 81%);
       }
+      .git-status tr:nth-of-type(odd) td:first-child,
       .git-diff tr:nth-of-type(odd) td:first-child,
       .git-log tr:nth-of-type(odd) td:first-child {
         background: hsl(56, 85%, 84%);
@@ -338,6 +340,24 @@
               <tr>
                 <td>glo</td>
                 <td>git log --oneline --decorate</td>
+              </tr>
+            </table>
+
+            <table class="git-table git-status">
+              <tr>
+                <th colspan="2">Status</th>
+              </tr>
+              <tr>
+                <td>gsb</td>
+                <td>git status -sb</td>
+              </tr>
+              <tr>
+                <td>gss</td>
+                <td>git status -s</td>
+              </tr>
+              <tr>
+                <td>gst</td>
+                <td>git status</td>
               </tr>
             </table>
 
