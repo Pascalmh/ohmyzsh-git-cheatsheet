@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>zsh git cheatsheet</title>
+    <meta name="description" content="" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <style>
+      html {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+          "Segoe UI Symbol";
+        margin: 0;
+        font-size: 0.85em;
+      }
+
+      body {
+        color: #2f2f2f;
+        margin: 0;
+      }
+
+      table {
+        width: 100%;
+      }
+
+      table tr {
+        vertical-align: top;
+      }
+
+      .layout-col {
+        width: 48%;
+      }
+
+      .layout-col:first-child {
+        padding-right: 1%;
+      }
+
+      .layout-col:last-child {
+        padding-left: 1%;
+      }
+
+      .a4 {
+        background-color: #fff;
+
+        height: 297mm;
+        width: 210mm;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .git-table {
+        border-spacing: 0;
+        margin-bottom: 2ch;
+      }
+
+      .git-table th,
+      .git-table td {
+        padding: 0.65ch 1ch;
+      }
+
+      .git-table th {
+        border: 1px solid #a9a9a9;
+        border-bottom: none;
+        text-align: left;
+      }
+
+      .git-table td {
+        border: 1px solid #a9a9a9;
+      }
+
+      .git-table tr:not(:last-of-type) td {
+        border-bottom: none;
+      }
+
+      .git-table tr > th,
+      .git-table tr > td:first-child {
+        font-weight: 600;
+      }
+
+      .git-table tr > td:first-child {
+        border-right: none;
+        width: 80px;
+      }
+
+      .git-table tr:nth-of-type(even) {
+        background: #f5f5f5;
+      }
+
+      /* creating */
+      .git-checkout tr td:first-child,
+      .git-add tr td:first-child,
+      .git-commit tr td:first-child,
+      .git-push tr td:first-child {
+        background: hsl(89 66% 79%);
+      }
+      .git-checkout tr:nth-of-type(odd) td:first-child,
+      .git-add tr:nth-of-type(odd) td:first-child,
+      .git-commit tr:nth-of-type(odd) td:first-child,
+      .git-push tr:nth-of-type(odd) td:first-child {
+        background: hsl(89 82% 83%);
+      }
+
+      /* destroying */
+      .git-rebase tr td:first-child,
+      .git-reset tr td:first-child {
+        background: hsl(0, 70%, 82%);
+      }
+      .git-rebase tr:nth-of-type(odd) td:first-child,
+      .git-reset tr:nth-of-type(odd) td:first-child {
+        background: hsl(359, 72%, 83%);
+      }
+
+      /* getting */
+      .git-pull tr td:first-child {
+        /*background: hsl(270 67% 81%);*/
+        background: hsl(200 67% 81%);
+      }
+      .git-pull tr:nth-of-type(odd) td:first-child {
+        /*background: hsl(280 85% 84%);*/
+        background: hsl(210 85% 84%);
+      }
+
+      /* information */
+      .git-diff tr td:first-child,
+      .git-log tr td:first-child {
+        background: hsl(55, 67%, 81%);
+      }
+      .git-diff tr:nth-of-type(odd) td:first-child,
+      .git-log tr:nth-of-type(odd) td:first-child {
+        background: hsl(56, 85%, 84%);
+      }
+
+      /* git checkout
+      .git-checkout tr td:first-child {
+        background: hsl(200 67% 81%);
+      }
+      .git-checkout tr:nth-of-type(odd) td:first-child {
+        background: hsl(210 85% 84%);
+      }*/
+    </style>
+  </head>
+  <body>
+    <div class="a4">
+      <table class="layout-table">
+        <tr class="layout-row">
+          <td class="layout-col">
+            <table class="git-table git-checkout">
+              <tr>
+                <th colspan="2">Switch / Checkout</th>
+              </tr>
+              <tr>
+                <td>gsw</td>
+                <td>git switch</td>
+              </tr>
+              <tr>
+                <td>gswc</td>
+                <td>git switch -c</td>
+              </tr>
+              <tr>
+                <td>gcm</td>
+                <td>git checkout master</td>
+              </tr>
+            </table>
+
+            <table class="git-table git-add">
+              <tr>
+                <th colspan="2">Add</th>
+              </tr>
+              <tr>
+                <td>ga</td>
+                <td>git add</td>
+              </tr>
+              <tr>
+                <td>gaa</td>
+                <td>git add -all</td>
+              </tr>
+              <tr>
+                <td>gapa</td>
+                <td>git add --patch</td>
+              </tr>
+              <tr>
+                <td>gav</td>
+                <td>git add --verbose</td>
+              </tr>
+            </table>
+
+            <table class="git-table git-commit">
+              <tr>
+                <th colspan="2">Commit / Cherry Pick</th>
+              </tr>
+              <tr>
+                <td>gc</td>
+                <td>git commit -v</td>
+              </tr>
+              <tr>
+                <td>gc!</td>
+                <td>git commit -v --amend</td>
+              </tr>
+              <tr>
+                <td>gca</td>
+                <td>git commit -v -a</td>
+              </tr>
+              <tr>
+                <td>gca!</td>
+                <td>git commit -v -a -amend</td>
+              </tr>
+              <tr>
+                <td>gcan!</td>
+                <td>git commit -v -a --no-edit --amend</td>
+              </tr>
+              <tr>
+                <td>gcans!</td>
+                <td>git commit -v -a -s --no-edit --amend</td>
+              </tr>
+              <tr>
+                <td>gcam</td>
+                <td>git commit -a -m</td>
+              </tr>
+              <tr>
+                <td>gcsm</td>
+                <td>git commit -s -m</td>
+              </tr>
+              <tr>
+                <td>gcmsg</td>
+                <td>git commit -m</td>
+              </tr>
+              <tr>
+                <td>gcs</td>
+                <td>git commit -S</td>
+              </tr>
+              <tr>
+                <td>gcp</td>
+                <td>git cherry-pick</td>
+              </tr>
+            </table>
+
+            <table class="git-table git-push">
+              <tr>
+                <th colspan="2">Push</th>
+              </tr>
+              <tr>
+                <td>gp</td>
+                <td>git push</td>
+              </tr>
+              <tr>
+                <td>ggp</td>
+                <td>git push origin $(curr­ent­_br­anch)</td>
+              </tr>
+              <tr>
+                <td>gpf</td>
+                <td>git push --force-with-lease</td>
+              </tr>
+              <tr>
+                <td>gpoat</td>
+                <td>git push origin --all &&<br />git push origin --tags</td>
+              </tr>
+            </table>
+
+            <table class="git-table git-pull">
+              <tr>
+                <th colspan="2">Fetch / Pull</th>
+              </tr>
+              <tr>
+                <td>gfa</td>
+                <td>git fetch --all --prune</td>
+              </tr>
+              <tr>
+                <td>gup</td>
+                <td>git pull --rebase</td>
+              </tr>
+              <tr>
+                <td>ggl</td>
+                <td>git pull origin $(curr­ent­_br­anch)</td>
+              </tr>
+              <tr>
+                <td>ggu</td>
+                <td>git pull --rebase origin $(curr­ent­_br­anch)</td>
+              </tr>
+              <tr>
+                <td>glum</td>
+                <td>git pull upstream master</td>
+              </tr>
+              <tr>
+                <td>ggpnp</td>
+                <td>
+                  git pull origin $(curr­ent­_br­anch) &&<br />git push origin
+                  $(curr­ent­_br­anch)
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td class="layout-col">
+          <table class="git-table git-diff">
+              <tr>
+                <th colspan="2">Diff</th>
+              </tr>
+              <tr>
+                <td>gd</td>
+                <td>git diff</td>
+              </tr>
+              <tr>
+                <td>gdca</td>
+                <td>git diff --cached</td>
+              </tr>
+              <tr>
+                <td>gdw</td>
+                <td>git diff --word­-diff</td>
+              </tr>
+            </table>
+
+            <table class="git-table git-log">
+              <tr>
+                <th colspan="2">Log</th>
+              </tr>
+              <tr>
+                <td>glg</td>
+                <td>git log --stat</td>
+              </tr>
+              <tr>
+                <td>glgp</td>
+                <td>git log --stat -p</td>
+              </tr>
+              <tr>
+                <td>glgg</td>
+                <td>git log --graph</td>
+              </tr>
+              <tr>
+                <td>glgga</td>
+                <td>git log --graph --decorate --all</td>
+              </tr>
+              <tr>
+                <td>glgm</td>
+                <td>git log --graph --max-count=10</td>
+              </tr>
+              <tr>
+                <td>glo</td>
+                <td>git log --oneline --decorate</td>
+              </tr>
+              <tr></tr
+            </table>
+
+            <table class="git-table git-rebase">
+              <tr>
+                <th colspan="2">Rebase</th>
+              </tr>
+              <tr>
+                <td>grbi</td>
+                <td>git rebase -i</td>
+              </tr>
+              <tr>
+                <td>grbs</td>
+                <td>git rebase --skip</td>
+              </tr>
+              <tr>
+                <td>grbc</td>
+                <td>git rebase --continue</td>
+              </tr>
+              <tr>
+                <td>grba</td>
+                <td>git rebase --abort</td>
+              </tr>
+            </table>
+
+            <table class="git-table git-reset">
+              <tr>
+                <th colspan="2">Revert / Reset / Cleanup</th>
+              </tr>
+              <tr>
+                <td>grev</td>
+                <td>git revert</td>
+              </tr>
+              <tr>
+                <td>grh</td>
+                <td>git reset HEAD</td>
+              </tr>
+              <tr>
+                <td>groh</td>
+                <td>git reset origin/$(git_current_branch)<br>--hard</td>
+              </tr>
+              <tr>
+                <td>grhh</td>
+                <td>git reset HEAD --hard</td>
+              </tr>
+              <tr>
+                <td>gpristine</td>
+                <td>git reset --hard &&<br />git clean -dfx</td>
+              </tr>
+              <tr>
+                <td>gclean</td>
+                <td>git clean -fd</td>
+              </tr>
+              <tr>
+                <td>gbda</td>
+                <td>delete all merged branches</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
